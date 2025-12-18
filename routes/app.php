@@ -1,12 +1,22 @@
 <?php
 
-use App\Http\App\Controllers\ClientAuthController;
+use App\Http\Controllers\App\ClientAuthController;
+use App\Http\Middleware\EnsureClient;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('app')->group(function () {
     Route::controller(ClientAuthController::class)->group(function ($router) {
-        $router->post('login', 'login');
-        $router->post('register', 'register');
-        $router->post('logout', 'logout')->middleware('auth:sanctum');
+
+        $router->prefix('auth')->group(function ($router) {
+            $router->post('login', 'login');
+            $router->post('register', 'register');
+
+            $router->middleware(['auth:sanctum', /* EnsureClient::class */])->group(function ($router) {
+                $router->middleware(EnsureClient::class)->group(function ($router) {
+                    $router->post('logout', 'logout');
+                    $router->get('me', 'me');
+                });
+            });
+        });
     });
 });
