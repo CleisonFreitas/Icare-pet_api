@@ -90,31 +90,31 @@ class PetSpecieSeeder extends Seeder
             [
                 'name' => 'Tartaruga',
                 'slug' => 'tartaruga',
-                'group' => GroupSpecieEnum::REPTILS,
+                'group' => GroupSpecieEnum::REPTIL,
                 'active' => true,
             ],
             [
                 'name' => 'Cágado',
                 'slug' => 'cagado',
-                'group' => GroupSpecieEnum::REPTILS,
+                'group' => GroupSpecieEnum::REPTIL,
                 'actived' => true,
             ],
             [
                 'name' => 'Iguana',
                 'slug' => 'iguana',
-                'group' => GroupSpecieEnum::REPTILS,
+                'group' => GroupSpecieEnum::REPTIL,
                 'actived' => true,
             ],
             [
                 'name' => 'Gecko',
                 'slug' => 'gecko',
-                'group' => GroupSpecieEnum::REPTILS,
+                'group' => GroupSpecieEnum::REPTIL,
                 'actived' => true,
             ],
             [
                 'name' => 'Cobra (não venenosa)',
                 'slug' => 'cobra-nao-venenosa',
-                'group' => GroupSpecieEnum::REPTILS,
+                'group' => GroupSpecieEnum::REPTIL,
                 'actived' => true,
             ],
 

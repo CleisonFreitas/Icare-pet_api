@@ -6,20 +6,20 @@ enum GroupSpecieEnum: string
 {
     case MAMIFERO = 'MAMIFERO';
     case PASSARO = 'PASSARO';
-    case REPTILS = 'REPTILS';
+    case REPTIL = 'REPTIL';
     case PEIXE = 'PEIXE';
     case AMFIBIO = 'AMFIBIO';
-    case INSETOS = 'INSETOS';
+    case INSETO = 'INSETO';
 
     public function description(): string
     {
         return match ($this) {
             self::MAMIFERO => 'Mamífero',
             self::PASSARO => 'Ave',
-            self::REPTILS => 'Réptil',
+            self::REPTIL => 'Réptil',
             self::PEIXE => 'Peixe',
             self::AMFIBIO => 'Anfíbio',
-            self::INSETOS => 'Inseto',
+            self::INSETO => 'Inseto',
         };
     }
 }
