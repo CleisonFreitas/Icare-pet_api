@@ -2,6 +2,7 @@
 
 namespace App\Models\Client;
 
+use App\Models\Pet\Pet;
 use Database\Factories\Client\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,4 +30,9 @@ class Client extends Authenticatable
     protected $hidden = [
         'password',
     ];
+    
+    public function pets()
+    {
+        return $this->hasMany(Pet::class, 'client_id');
+    }
 }
