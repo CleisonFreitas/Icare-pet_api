@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('pets', function (Blueprint $table) {
@@ -19,7 +16,6 @@ return new class extends Migration
             $table->string('size');
             $table->date('birth_date')->nullable();
             $table->string('color')->nullable();
-            $table->float('weight')->nullable();
             $table->boolean('microchipped')->default(false);
             $table->string('microchip_number')->nullable();
             $table->boolean('registered')->default(true);
@@ -28,9 +24,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('pets');

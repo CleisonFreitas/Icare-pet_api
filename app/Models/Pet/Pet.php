@@ -27,7 +27,6 @@ class Pet extends Model
         'breed',
         'birth_date',
         'color',
-        'weight',
         'size',
         'microchipped',
         'microchip_number',
@@ -35,7 +34,6 @@ class Pet extends Model
     protected $casts = [
         'birth_date' => 'date',
         'microchipped' => 'boolean',
-        'weight' => 'float',
     ];
 
     public function owner(): BelongsTo

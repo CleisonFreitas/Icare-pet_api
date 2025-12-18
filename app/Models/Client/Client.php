@@ -5,6 +5,7 @@ namespace App\Models\Client;
 use App\Models\Pet\Pet;
 use Database\Factories\Client\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,5 +35,10 @@ class Client extends Authenticatable
     public function pets()
     {
         return $this->hasMany(Pet::class, 'client_id');
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class, 'client_id');
     }
 }
