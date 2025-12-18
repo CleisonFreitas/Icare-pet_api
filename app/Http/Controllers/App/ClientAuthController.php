@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App;
 
+use App\Events\App\UserLogged;
 use App\Models\Client\Client;
 use App\Services\Client\ClientAuthService;
 use App\Services\Client\ClientExpiresTokenService;
@@ -24,7 +25,7 @@ final class ClientAuthController
         ]);
         $client = Client::where('email', $data['email'])->first();
         $response = $this->clientAuthService->login($data, $client);
-
+        event(new UserLogged($client));
         return response()->json($response);
     }
 
