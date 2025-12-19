@@ -16,7 +16,7 @@ enum MedicalTypeEnum: string
             MedicalTypeEnum::VACCINATION => 'Vacinação',
             MedicalTypeEnum::TREATMENT => 'Tratamento',
             MedicalTypeEnum::CONSULTATION => 'Consulta',
-            MedicalTypeEnum::SURGERY => 'SURGERY',
+            MedicalTypeEnum::SURGERY => 'Cirúrgia',
             MedicalTypeEnum::DEWORMING => 'Vermifugação',
         };
     }
