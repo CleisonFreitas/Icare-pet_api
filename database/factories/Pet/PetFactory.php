@@ -21,7 +21,6 @@ class PetFactory extends Factory
             'breed' => $this->faker->word(),
             'birth_date' => $this->faker->date(),
             'color' => $this->faker->colorName(),
-            'weight' => $this->faker->randomFloat(2, 0.5, 100.0),
             'size' => $this->faker->randomElement([Pet::SMALL, Pet::MEDIUM, Pet::LARGE]),
             'microchipped' => $this->faker->boolean(),
             'microchip_number' => $this->faker->unique()->numerify('##########'),

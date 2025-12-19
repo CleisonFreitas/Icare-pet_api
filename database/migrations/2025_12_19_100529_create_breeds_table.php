@@ -4,21 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * CreateClientsTable Migration
- */
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('breeds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->nullable();
-            $table->string('password')->nullable();
-            $table->date('birthdate')->nullable();
-            $table->boolean('active')->default(true);
+            $table->string('slug')->unique()->nullable();
+            $table->foreignId('specie_id')->constrained('species');
+            $table->boolean('active');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('breeds');
     }
 };

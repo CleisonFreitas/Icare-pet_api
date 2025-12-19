@@ -18,8 +18,7 @@ class ClientFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'password' => $this->faker->password(),
             'birthdate' => $this->faker->date(),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'active' => $this->faker->boolean(),
         ];
     }
 }

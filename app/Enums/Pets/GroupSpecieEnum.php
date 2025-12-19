@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Logs\App\Pets;
+namespace App\Enums\Pets;
 
 enum GroupSpecieEnum: string
 {
