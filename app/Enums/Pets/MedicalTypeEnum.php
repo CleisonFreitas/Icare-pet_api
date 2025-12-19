@@ -4,20 +4,20 @@ namespace App\Enums\Pets;
 
 enum MedicalTypeEnum: string
 {
-    case VACINACAO = 'VACINACAO';
-    case TRATAMENTO = 'TRATAMENTO';
-    case CONSULTA = 'CONSULTA';
-    case CIRURGIA = 'CIRURGIA';
-    case VERMIFUGACAO = 'VERMIFUGACAO';
+    case VACCINATION = 'VACCINATION';
+    case TREATMENT = 'TREATMENT';
+    case CONSULTATION = 'CONSULTATION';
+    case SURGERY = 'SURGERY';
+    case DEWORMING = 'DEWORMING';
 
     public function description(): string
     {
         return match ($this) {
-            MedicalTypeEnum::VACINACAO => 'Vacinação',
-            MedicalTypeEnum::TRATAMENTO => 'Tratamento',
-            MedicalTypeEnum::CONSULTA => 'Consulta',
-            MedicalTypeEnum::CIRURGIA => 'Cirurgia',
-            MedicalTypeEnum::VERMIFUGACAO => 'Vermifugação',
+            MedicalTypeEnum::VACCINATION => 'Vacinação',
+            MedicalTypeEnum::TREATMENT => 'Tratamento',
+            MedicalTypeEnum::CONSULTATION => 'Consulta',
+            MedicalTypeEnum::SURGERY => 'SURGERY',
+            MedicalTypeEnum::DEWORMING => 'Vermifugação',
         };
     }
 }

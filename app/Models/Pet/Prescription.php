@@ -5,6 +5,7 @@ namespace App\Models\Pet;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prescription extends Model
@@ -30,12 +31,12 @@ class Prescription extends Model
         'refills' => 'integer',
     ];
 
-    public function pet()
+    public function pet(): BelongsTo
     {
         return $this->belongsTo(Pet::class);
     }
 
-    public function veterinarian()
+    public function veterinarian(): BelongsTo
     {
         return $this->belongsTo(User::class, 'prescribed_by');
     }

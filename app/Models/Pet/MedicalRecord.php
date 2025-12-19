@@ -4,6 +4,7 @@ namespace App\Models\Pet;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MedicalRecord extends Model
@@ -38,7 +39,7 @@ class MedicalRecord extends Model
         'respiratory_rate' => 'integer',
     ];
 
-    public function pet()
+    public function pet(): BelongsTo
     {
         return $this->belongsTo(Pet::class, 'pet_id');
     }
