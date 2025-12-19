@@ -11,7 +11,6 @@ class PetSpecieSeeder extends Seeder
 {
     public function run(): void
     {
-        // Build species list from SpecieNameEnum
         $species = [];
 
         foreach (SpecieNameEnum::cases() as $case) {
