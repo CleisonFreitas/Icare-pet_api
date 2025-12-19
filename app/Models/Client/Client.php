@@ -21,11 +21,13 @@ class Client extends Authenticatable
         'phone',
         'password',
         'birthdate',
+        'active'
     ];
 
     protected $casts = [
         'birthdate' => 'date',
         'password' => 'hashed',
+        'active' => 'boolean',
     ];
 
     protected $hidden = [

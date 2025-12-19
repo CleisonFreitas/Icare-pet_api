@@ -2,7 +2,7 @@
 
 namespace App\Models\Pet;
 
-use App\Enums\Logs\App\Pets\GroupSpecieEnum;
+use App\Enums\Pets\GroupSpecieEnum;
 use Database\Factories\Pet\SpecieFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

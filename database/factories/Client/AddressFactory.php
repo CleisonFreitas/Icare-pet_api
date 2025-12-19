@@ -3,6 +3,7 @@
 namespace Database\Factories\Client;
 
 use App\Models\Client\Address;
+use App\Models\Client\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -13,7 +14,7 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id' => \App\Models\Client\Client::factory(),
+            'client_id' => Client::factory(),
             'street' => $this->faker->streetAddress(),
             'number' => $this->faker->buildingNumber(),
             'complement' => $this->faker->optional()->word(),

@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Pet;
 
-use App\Enums\Logs\App\Pets\MedicalTypeEnum;
+use App\Enums\Pets\MedicalTypeEnum;
 use App\Models\Pet\MedicalRecord;
 use App\Models\Pet\Pet;
 use Illuminate\Database\Eloquent\Factories\Factory;
