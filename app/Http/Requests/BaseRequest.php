@@ -16,7 +16,6 @@ abstract class BaseRequest extends FormRequest
 
     public function failedValidation(Validator $validator): void
     {
-
         throw new HttpResponseException(
             response: response()->json([
                 'mensagem' => $validator->errors()->first(),

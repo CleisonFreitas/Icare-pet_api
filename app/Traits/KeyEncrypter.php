@@ -11,13 +11,11 @@ trait KeyEncrypter
 {
     public static function encryptKey(int|string $key): string
     {
-        // Use encryptString to ensure we get a string representation
         return Crypt::encryptString((string) $key);
     }
 
     public function decryptKey(int|string $key): string
     {
-        // Accept an encrypted string and return the original id as string
         return Crypt::decryptString((string) $key);
     }
 

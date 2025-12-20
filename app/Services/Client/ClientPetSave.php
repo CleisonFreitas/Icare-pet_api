@@ -29,7 +29,10 @@ class ClientPetSave
             throw new \Exception('É necessário cadastrar ao menos um pet');
         }
 
-        $petMapped = array_map(fn($data) => [...$data, 'client_id' => $client->id], $petData);
+        $petMapped = array_map(fn($data) => [
+            ...$data,
+            'client_id' => $client->id
+        ], $petData);
         Pet::upsert($petMapped, 'id', ['name', 'specie_id', 'size', 'color']);
         $client->register_completed = true;
         $client->save();
