@@ -19,6 +19,7 @@ final class ClientPetController
      * 
      * @param string $clientId
      * @param RegisterRequest $request
+     * @param ClientPetSave $service
      * @return JsonResponse
      */
     public function register(
