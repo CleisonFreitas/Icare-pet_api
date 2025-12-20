@@ -15,7 +15,6 @@ class Pet extends Model
     public const MEDIUM = 'Medium';
     public const LARGE = 'Large';
 
-    /** @use HasFactory<PetFactory> */
     use HasFactory, SoftDeletes;
 
     protected $table = 'pets';
@@ -24,7 +23,6 @@ class Pet extends Model
         'name',
         'client_id',
         'specie_id',
-        'breed',
         'birth_date',
         'color',
         'size',
