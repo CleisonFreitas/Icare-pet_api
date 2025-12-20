@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Client;
 
+use App\ClientResource;
 use App\Models\Client\Client;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,7 +37,7 @@ class ClientAuthService
         )->plainTextToken;
 
         return [
-            'client' => $client,
+            'client' => new ClientResource($client),
             'token' => $token
         ];
     }

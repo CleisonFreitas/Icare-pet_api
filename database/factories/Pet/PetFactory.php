@@ -18,7 +18,6 @@ class PetFactory extends Factory
             'name' => $this->faker->firstName(),
             'client_id' => Client::factory()->lazy(),
             'specie_id' => Specie::factory()->lazy(),
-            'breed' => $this->faker->word(),
             'birth_date' => $this->faker->date(),
             'color' => $this->faker->colorName(),
             'size' => $this->faker->randomElement([Pet::SMALL, Pet::MEDIUM, Pet::LARGE]),

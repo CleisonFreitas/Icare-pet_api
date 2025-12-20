@@ -3,7 +3,7 @@
 namespace App\Models\Client;
 
 use App\Models\Pet\Pet;
-use Database\Factories\Client\ClientFactory;
+use App\Traits\KeyEncrypter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,29 +12,30 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client extends Authenticatable
 {
-    /** @use HasFactory<ClientFactory> */
-    use HasFactory, SoftDeletes, HasApiTokens;
+    use HasFactory, SoftDeletes, HasApiTokens, KeyEncrypter;
 
     protected $fillable = [
         'name',
         'email',
         'phone',
         'password',
-        'birthdate',
-        'active'
+        'birth_date',
+        'active',
+        'register_completed',
     ];
 
     protected $casts = [
-        'birthdate' => 'date',
+        'birth_date' => 'date',
         'password' => 'hashed',
         'active' => 'boolean',
+        'register_completed' => 'boolean',
     ];
 
     protected $hidden = [
         'password',
     ];
     
-    public function pets()
+    public function pets(): HasMany
     {
         return $this->hasMany(Pet::class, 'client_id');
     }

@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('species_id')->constrained('species')->onDelete('cascade');
-            $table->string('breed')->nullable();
+            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
+            $table->foreignId('specie_id')->constrained('species')->onDelete('cascade');
             $table->string('size');
             $table->date('birth_date')->nullable();
             $table->string('color')->nullable();

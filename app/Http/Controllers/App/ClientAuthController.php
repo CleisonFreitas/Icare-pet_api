@@ -7,8 +7,8 @@ namespace App\Http\Controllers\App;
 use App\Events\App\UserLogged;
 use App\Models\Client\Client;
 use App\Services\Client\ClientAuthService;
-use App\Services\Client\ClientExpiresTokenService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ClientAuthController
@@ -17,7 +17,7 @@ final class ClientAuthController
         private readonly ClientAuthService $clientAuthService,
     ) {}
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $data = $request->validate([
             'email' => ['required', 'email'],
@@ -36,7 +36,7 @@ final class ClientAuthController
             'email' => ['required', 'email', 'max:255', 'unique:clients,email'],
             'phone' => ['nullable', 'string', 'max:20'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'birthdate' => ['nullable', 'date'],
+            'birth_date' => ['nullable', 'date'],
         ]);
 
         $client = Client::create($data);
@@ -45,7 +45,7 @@ final class ClientAuthController
         return response()->json($response, Response::HTTP_CREATED);
     }
 
-    public function me(Request $request)
+    public function me(Request $request): JsonResponse
     {
         /** @var Client $client */
         $client = $request->user();
@@ -55,7 +55,7 @@ final class ClientAuthController
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $token = $request->user()?->currentAccessToken();
         if ($token) {
