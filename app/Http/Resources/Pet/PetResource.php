@@ -13,8 +13,6 @@ class PetResource extends JsonResource
         return [
             'id' => $this->getKey(),
             'name' => $this->name,
-            'client_id' => $this->client_id,
-            'specie_id' => $this->specie_id,
             'birth_date' => $this->birth_date?->format('Y-m-d'),
             'color' => $this->color,
             'microchipped' => $this->microchipped,
