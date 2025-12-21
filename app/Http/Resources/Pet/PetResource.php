@@ -31,8 +31,7 @@ class PetResource extends JsonResource
 
             'client' => $this->whenLoaded(
                 'client',
-                fn()
-                => new ClientResource($this->client)
+                fn()    => new ClientResource($this->client)
             ),
         ];
     }
