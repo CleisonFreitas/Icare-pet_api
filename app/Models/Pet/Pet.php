@@ -3,6 +3,7 @@
 namespace App\Models\Pet;
 
 use App\Models\Client\Client;
+use App\Traits\KeyEncrypter;
 use Database\Factories\Pet\PetFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,7 @@ class Pet extends Model
     public const MEDIUM = 'Medium';
     public const LARGE = 'Large';
 
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, KeyEncrypter;
 
     protected $table = 'pets';
 
@@ -34,7 +35,7 @@ class Pet extends Model
         'microchipped' => 'boolean',
     ];
 
-    public function owner(): BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'client_id');
     }

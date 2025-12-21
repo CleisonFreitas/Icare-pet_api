@@ -19,7 +19,7 @@ trait KeyEncrypter
         return Crypt::decryptString((string) $key);
     }
 
-    public function getByKey(): int|string
+    public function getKey(): int|string
     {
         $id = $this->{$this->getKeyName()};
 
