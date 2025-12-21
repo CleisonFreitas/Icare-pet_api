@@ -3,15 +3,14 @@
 namespace App\Models\Pet;
 
 use App\Enums\Pets\GroupSpecieEnum;
-use Database\Factories\Pet\SpecieFactory;
+use App\Traits\KeyEncrypter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Specie extends Model
 {
-    /** @use HasFactory<SpecieFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, KeyEncrypter;
 
     protected $fillable = [
         'name',
