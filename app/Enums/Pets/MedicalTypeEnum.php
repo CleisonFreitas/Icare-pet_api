@@ -20,4 +20,9 @@ enum MedicalTypeEnum: string
             MedicalTypeEnum::DEWORMING => 'Vermifugação',
         };
     }
+
+    public static function values(): array
+    {
+        return array_map(fn($case) => $case->value, self::cases());
+    }
 }

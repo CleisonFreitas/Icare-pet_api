@@ -3,15 +3,18 @@
 namespace App\Models\Pet;
 
 use App\Enums\Pets\StatusServiceEnum;
-use App\Models\User;
+use App\Models\Client\Client;
+use App\Models\Common\Note;
+use App\Traits\KeyEncrypter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Schedule extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, KeyEncrypter;
 
     protected $table = 'schedules';
 
@@ -35,6 +38,11 @@ class Schedule extends Model
 
     public function client(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'client_id');
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+        public function note(): MorphMany
+    {
+        return $this->morphMany(Note::class, 'origin');
     }
 }

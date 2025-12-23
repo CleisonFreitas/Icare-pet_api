@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('pet_id')
                 ->nullable()
                 ->constrained('pets');
+            $table->morphs('origin');
             $table->string('segment');
             $table->timestamps();
             $table->softDeletes();

@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Note extends Model
@@ -22,9 +23,16 @@ class Note extends Model
         'content',
         'user_id',
         'client_id',
+        'origin_id',
+        'origin_type',
         'pet_id',
         'segment'
     ];
+
+    public function origin(): MorphTo
+    {
+        return $this->morphTo();
+    }
 
     protected $cast = [
         'segment' => SegmentNoteEnum::class,

@@ -53,7 +53,7 @@ trait KeyEncrypter
             $id = $key;
         }
 
-        return $class::find($id);
+        return $class::findOrFail($id);
     }
 
     /**

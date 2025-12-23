@@ -5,17 +5,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateSchedulesTable extends Migration
 {
     public function up(): void
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients');
-            $table->foreignId('pet_id')->constrained('pets');
+            $table->foreignId('client_id')
+                ->nullable()
+                ->constrained('clients');
+            $table->foreignId('pet_id')
+                ->nullable()
+                ->constrained('pets');
             $table->dateTime('scheduled_date');
             $table->string('service_type');
-            $table->string('status')->default(StatusServiceEnum::PENDING->value);
+            $table->string('status')->default(StatusServiceEnum::OPEN->value);
             $table->timestamps();
             $table->softDeletes();
         });

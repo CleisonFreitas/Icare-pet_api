@@ -4,10 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * CreatePersonalAccessTokensTable Migration
- */
-return new class extends Migration
+class CreatePersonalAccessTokensTable extends Migration
 {
     public function up(): void
     {
