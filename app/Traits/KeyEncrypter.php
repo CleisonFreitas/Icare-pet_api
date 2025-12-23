@@ -39,7 +39,7 @@ trait KeyEncrypter
      * @return ?Model
      */
     public static function findByKey(string|int $key): ?Model
-    {
+    {  
         $class = static::class;
 
         if (config('crypt.crypt.active')) {
@@ -53,7 +53,7 @@ trait KeyEncrypter
             $id = $key;
         }
 
-        return $class::find($id);
+        return $class::findOrFail($id);
     }
 
     /**
