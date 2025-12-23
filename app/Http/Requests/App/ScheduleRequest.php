@@ -13,7 +13,7 @@ class ScheduleRequest extends BaseRequest
     {
         return [
             'pet_id' => ['required', Rule::exists(Pet::class, 'id')],
-            'schedule_id' => ['required', /* Rule::exists(Schedule::class, 'id') */],
+            'schedule_id' => ['required', Rule::exists(Schedule::class, 'id')],
         ];
     }
 
