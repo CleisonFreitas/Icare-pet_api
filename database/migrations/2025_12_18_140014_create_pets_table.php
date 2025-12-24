@@ -13,6 +13,7 @@ class CreatePetsTable extends Migration
             $table->string('name');
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('specie_id')->constrained('species')->onDelete('cascade');
+            $table->boolean('active')->default(true);
             $table->string('size');
             $table->date('birth_date')->nullable();
             $table->string('color')->nullable();

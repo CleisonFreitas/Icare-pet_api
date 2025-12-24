@@ -3,6 +3,7 @@
 namespace App\Models\Client;
 
 use App\Models\Pet\Pet;
+use App\Models\Pet\Schedule;
 use App\Traits\KeyEncrypter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -43,5 +44,10 @@ class Client extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class, 'client_id');
+    }
+
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(Schedule::class);
     }
 }
