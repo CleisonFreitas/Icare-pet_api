@@ -29,10 +29,12 @@ class Pet extends Model
         'size',
         'microchipped',
         'microchip_number',
+        'active'
     ];
     protected $casts = [
         'birth_date' => 'date',
         'microchipped' => 'boolean',
+        'active' => 'boolean'
     ];
 
     public function client(): BelongsTo

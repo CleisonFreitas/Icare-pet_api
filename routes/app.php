@@ -25,7 +25,9 @@ Route::prefix('app')->middleware('throttle:30,1')->group(function () {
 
             // Client actions
             $router->middleware(ClientValidMiddleware::class)->group(function ($router) {
-                $router->put('client/{clientId}/schedule', [ClientScheduleController::class, 'schedule']);
+                $router->put('client/{clientId}/pet/{petId}/schedule', [ClientScheduleController::class, 'schedule']);
+                
+                $router->get('client/{clientId}/pets', [ClientPetController::class, 'show']);
             });
         });
 });

@@ -41,8 +41,33 @@ class Schedule extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
-        public function note(): MorphMany
+    public function note(): MorphMany
     {
         return $this->morphMany(Note::class, 'origin');
+    }
+
+    public function isOpen(): bool
+    {
+        return $this->status === StatusServiceEnum::OPEN;
+    }
+
+    public function isPending(): bool
+    {
+        return $this->status === StatusServiceEnum::PENDING;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->status === StatusServiceEnum::CONFIRMED;
+    }
+
+    public function isCanceled(): bool
+    {
+        return $this->status === StatusServiceEnum::CANCELLED;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->status === StatusServiceEnum::COMPLETED;
     }
 }
