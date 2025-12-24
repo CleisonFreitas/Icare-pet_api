@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App;
 
+use App\Http\Requests\App\ScheduleManageRequest;
 use App\Http\Requests\App\ScheduleRequest;
 use App\Http\Resources\Schedule\ScheduleResource;
 use App\Models\Client\Client;
 use App\Models\Pet\Pet;
+use App\Models\Pet\Schedule;
+use App\Services\Client\ClientScheduleManagementService;
 use App\Services\Client\ClientScheduleService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -25,5 +28,26 @@ final class ClientScheduleController
         $pet = Pet::findByKey($petId);
         $response = $service->create($client, $pet, $request->validated());
         return response()->json(new ScheduleResource($response));
+    }
+
+    /**
+     * Responsible rescheduling 
+     * @param string $clientId
+     * @param string $scheduleId
+     * @return JsonResponse
+     */
+    public function manage(
+        string $clientId,
+        string $scheduleId,
+        ClientScheduleManagementService $service,
+        ScheduleManageRequest $request,
+    ): JsonResponse
+    {
+        /** @var Client $client*/
+        $client = Client::findByKey($clientId);
+        $schedule = Schedule::findByKey($scheduleId);
+
+        $newSchedule = $service->manage($client,$schedule, $request->validated());
+        return response()->json(new ScheduleResource($newSchedule));
     }
 }

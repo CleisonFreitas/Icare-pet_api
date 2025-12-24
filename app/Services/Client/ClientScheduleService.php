@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Client;
 
-use App\Enums\Pets\StatusServiceEnum;
+use App\Enums\Pets\StatusScheduleEnum;
 use App\Facades\SaveRecordFacade;
 use App\Models\Client\Client;
 use App\Models\Pet\Pet;
@@ -32,7 +32,7 @@ class ClientScheduleService
         $newData = [
             'pet_id' => $pet->id,
             'client_id' => $client->id,
-            'status' => StatusServiceEnum::PENDING
+            'status' => StatusScheduleEnum::PENDING
         ];
 
         return SaveRecordFacade::save($model, $newData);
@@ -46,7 +46,7 @@ class ClientScheduleService
 
         $existingSchedule = $client->schedules()
             ->where('scheduled_date', $schedule->scheduled_date)
-            ->whereNot('status', StatusServiceEnum::OPEN)
+            ->whereNot('status', StatusScheduleEnum::OPEN)
             ->exists();
 
         if ($existingSchedule) {
