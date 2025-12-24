@@ -2,7 +2,7 @@
 
 namespace App\Models\Pet;
 
-use App\Enums\Pets\StatusServiceEnum;
+use App\Enums\Pets\StatusScheduleEnum;
 use App\Models\Client\Client;
 use App\Models\Common\Note;
 use App\Traits\KeyEncrypter;
@@ -28,7 +28,7 @@ class Schedule extends Model
 
     protected $casts = [
         'scheduled_date' => 'datetime',
-        'status' => StatusServiceEnum::class,
+        'status' => StatusScheduleEnum::class,
     ];
 
     public function pet(): BelongsTo
@@ -48,26 +48,26 @@ class Schedule extends Model
 
     public function isOpen(): bool
     {
-        return $this->status === StatusServiceEnum::OPEN;
+        return $this->status === StatusScheduleEnum::OPEN;
     }
 
     public function isPending(): bool
     {
-        return $this->status === StatusServiceEnum::PENDING;
+        return $this->status === StatusScheduleEnum::PENDING;
     }
 
     public function isConfirmed(): bool
     {
-        return $this->status === StatusServiceEnum::CONFIRMED;
+        return $this->status === StatusScheduleEnum::CONFIRMED;
     }
 
     public function isCanceled(): bool
     {
-        return $this->status === StatusServiceEnum::CANCELLED;
+        return $this->status === StatusScheduleEnum::CANCELLED;
     }
 
     public function isCompleted(): bool
     {
-        return $this->status === StatusServiceEnum::COMPLETED;
+        return $this->status === StatusScheduleEnum::COMPLETED;
     }
 }

@@ -4,7 +4,6 @@ namespace App\Enums\Pets;
 
 enum StatusServiceEnum: string
 {
-    case OPEN = 'OPEN';
     case PENDING = 'PENDING';
     case CONFIRMED = 'CONFIRMED';
     case CANCELLED = 'CANCELLED';
