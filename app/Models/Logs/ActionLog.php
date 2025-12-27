@@ -16,4 +16,12 @@ class ActionLog extends Model
         'properties',
         'batch_uuid',
     ];
+
+    protected $casts = [
+        'properties' => 'json',
+        'log_name' => 'string',
+        'description' => 'string',
+        'performed_by' => 'integer',
+        'performed_type' => 'string',
+    ];
 }

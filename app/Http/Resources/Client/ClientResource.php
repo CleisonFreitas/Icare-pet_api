@@ -17,6 +17,7 @@ class ClientResource extends JsonResource
             'phone' => $this->phone,
             'birth_date' => $this->birth_date->format('Y-m-d'),
             'pets' => PetResource::collection($this->pets),
+            'register_completed'=> $this->register_completed,
         ];
     }
 }

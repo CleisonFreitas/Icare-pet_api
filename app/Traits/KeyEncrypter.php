@@ -19,11 +19,11 @@ trait KeyEncrypter
         return Crypt::decryptString((string) $key);
     }
 
-    public function getKey(): int|string
+    public function getKey(bool $forceCrypt = false): int|string
     {
         $id = $this->{$this->getKeyName()};
-
-        return config('crypt.crypt.active')
+        $allowedCrypt = config('crypt.crypt.active') || $forceCrypt;
+        return $allowedCrypt
             ? $this->encryptKey($id)
             : $id;
     }

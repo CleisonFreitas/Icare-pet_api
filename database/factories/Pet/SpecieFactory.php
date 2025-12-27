@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Pet;
 
-use App\Enums\Logs\App\Pets\GroupSpecieEnum;
+use App\Enums\Pets\GroupSpecieEnum;
 use App\Models\Pet\Specie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -11,11 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SpecieFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
