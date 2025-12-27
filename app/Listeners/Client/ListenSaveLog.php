@@ -14,11 +14,11 @@ class ListenSaveLog
             'description' => $event->getDescription(),
             'performed_by' => $event->getPerformedBy(),
             'performed_type' => $event->getPerformedType(),
-            'properties' => [
-                ...$event->getDetails(),
+            'properties' => array_merge($event->getDetails(), [
                 'ip' => request()->ip(),
-                'device' => request()->httpHost()
-            ],
+                'device' => request()->userAgent(),
+                'host' => request()->schemeAndHttpHost(),
+            ]),
         ]);
     }
 }

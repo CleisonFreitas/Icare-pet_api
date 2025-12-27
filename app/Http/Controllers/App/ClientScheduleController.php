@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App;
 
-use App\Events\App\ClientScheduleCreated;
 use App\Events\App\ClientScheduleUpdated;
-use App\Events\Client\SaveLog;
 use App\Http\Requests\App\ScheduleManageRequest;
 use App\Http\Requests\App\ScheduleRequest;
 use App\Http\Resources\Schedule\ScheduleResource;

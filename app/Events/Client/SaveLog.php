@@ -4,16 +4,21 @@ namespace App\Events\Client;
 
 use App\Models\Client\Client;
 use App\Models\User\User;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 
 class SaveLog
 {
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
     public function __construct(
-        private string $logName,
-        private string $description,
-        private string $performedType,
-        private int $performedBy,
-        private array $details = [],
+        public string $logName,
+        public string $description,
+        public string $performedType,
+        public int $performedBy,
+        public array $details = [],
     ) {}
 
     public function getLogName(): string
@@ -45,16 +50,24 @@ class SaveLog
         string $logName,
         string $description,
         array $details = []
-    ): self
+    ): SaveLog
     {
         /** @var Client|User */
         $user = Auth::user();
-        return new self(
+        $log = new SaveLog(
             logName: $logName,
             description: $description,
             performedType: $user::class,
             performedBy: $user->id,
             details: $details
         );
+
+        try {
+            event($log);
+        } catch (\Throwable $e) {
+            logger()->error('Failed to dispatch SaveLog event: ' . $e->getMessage(), ['exception' => $e]);
+        }
+
+        return $log;
     }
 }

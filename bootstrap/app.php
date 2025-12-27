@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withEvents([
-        __DIR__ . '/../app/Listeners/Client',
+        __DIR__ . '/../app/Listeners',
     ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
