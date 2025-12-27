@@ -18,14 +18,13 @@ class ClientScheduleListService
      */
     public function list(Client $client): Collection
     {
-        return $client->schedules()->whereIn(
-            'status',
-            [
+        return $client
+            ->schedules()
+            ->whereIn('status', [
                 StatusScheduleEnum::OPEN,
                 StatusScheduleEnum::PENDING,
                 StatusScheduleEnum::CONFIRMED,
-            ]
-        )
+            ])
             ->orderBy('scheduled_date')
             ->get();
     }
