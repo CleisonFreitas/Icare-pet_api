@@ -10,7 +10,7 @@ use App\Models\Client\Client;
 use App\Models\Pet\Pet;
 use App\Models\Pet\Schedule;
 
-class ClientScheduleService
+class ClientScheduleCreateService
 {
     /**
      * Service responsible for scheduling customer appointments.
@@ -28,7 +28,7 @@ class ClientScheduleService
         if (!$pet->active) {
             throw new \Exception('O pet informado não está ativo');
         }
-        $this->validatingSchedule($model, $client);
+        $this->runValidations($model, $client);
         $newData = [
             'pet_id' => $pet->id,
             'client_id' => $client->id,
@@ -38,7 +38,7 @@ class ClientScheduleService
         return SaveRecordFacade::save($model, $newData);
     }
 
-    private function validatingSchedule(Schedule $schedule, Client $client): void
+    private function runValidations(Schedule $schedule, Client $client): void
     {
         if (!$schedule->isOpen()) {
             throw new \Exception('Dia/horário informado não é válido');
