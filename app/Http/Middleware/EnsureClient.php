@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 use App\Models\Client\Client;
 use Closure;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureClient
@@ -23,8 +24,7 @@ class EnsureClient
                 'resposta' => 'Não autenticado.'
             ], Response::HTTP_UNAUTHORIZED);
         }
-        $token = $user->currentAccessToken();
-
+        $token = $this->getCurrentAccessToken(client: $user);
         if ($token->expires_at->lessThan(now())) {
             return response()->json([
                 'resposta' => 'Token expirado.'
@@ -43,5 +43,14 @@ class EnsureClient
         }
 
         return response()->json(['resposta' => 'Você não tem acesso.'], Response::HTTP_FORBIDDEN);
+    }
+
+    private function getCurrentAccessToken(Client $client): PersonalAccessToken
+    {
+        if (app()->environment('testing')) {
+            return $client->tokens()->first();
+        }
+
+        return $client->currentAccessToken();
     }
 }

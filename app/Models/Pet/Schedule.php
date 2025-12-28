@@ -9,7 +9,6 @@ use App\Traits\KeyEncrypter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Schedule extends Model
@@ -39,11 +38,6 @@ class Schedule extends Model
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'client_id');
-    }
-
-    public function note(): MorphMany
-    {
-        return $this->morphMany(Note::class, 'origin');
     }
 
     public function isOpen(): bool

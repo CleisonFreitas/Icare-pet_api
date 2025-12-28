@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App;
 
+use App\Events\App\ClientScheduleUpdated;
 use App\Http\Requests\App\ScheduleManageRequest;
 use App\Http\Requests\App\ScheduleRequest;
 use App\Http\Resources\Schedule\ScheduleResource;
@@ -69,8 +70,9 @@ final class ClientScheduleController
         /** @var Client */
         $client = Client::findByKey($clientId);
         $pet = Pet::findByKey($petId);
-        $response = $service->create($client, $pet, $request->validated());
-        return response()->json(new ScheduleResource($response));
+        $schedule = $service->create($client, $pet, $request->validated());
+        event(new ClientScheduleUpdated($schedule));
+        return response()->json(new ScheduleResource($schedule));
     }
 
     /**

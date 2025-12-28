@@ -17,8 +17,9 @@ class ClientFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'password' => $this->faker->password(),
-            'birthdate' => $this->faker->date(),
-            'active' => $this->faker->boolean(),
+            'birth_date' => $this->faker->date(),
+            'active' => true,
+            'register_completed' => true,
         ];
     }
 }
