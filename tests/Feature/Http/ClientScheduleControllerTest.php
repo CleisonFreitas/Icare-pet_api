@@ -4,13 +4,10 @@ namespace Tests\Feature\Http;
 
 use App\Enums\Logs\App\ClientActivityLogsEnum;
 use App\Enums\Pets\StatusScheduleEnum;
-use App\Events\App\ClientScheduleCreated;
 use App\Events\App\ClientScheduleUpdated;
-use App\Models\Client\Client;
 use App\Models\Pet\Pet;
 use App\Models\Pet\Schedule;
 use Illuminate\Support\Facades\Event;
-use Laravel\Sanctum\Sanctum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -29,7 +26,13 @@ final class ClientScheduleControllerTest extends TestCase
         ]);
         $uri = 'api/v1/app/client/%s/pet/%s/schedule';
         $api = sprintf($uri, $client->getKey(), $pet->getKey());
-        $response = $this->put($api, ['schedule_id' => $schedule->getKey()]);
+        $response = $this->put($api, [
+            'schedule_id' => $schedule->getKey(),
+            'note' => [
+                'title' => $this->faker->word,
+                'content' => $this->faker->sentence
+            ]
+        ]);
         $response->assertOk();
         $response->assertJsonStructure([
             'id', 'client_id', 'pet_id', 'service_type'
