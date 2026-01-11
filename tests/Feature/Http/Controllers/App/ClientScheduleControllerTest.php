@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http;
+namespace Tests\Feature\Http\Controllers\App;
 
 use App\Enums\Logs\App\ClientActivityLogsEnum;
 use App\Enums\Pets\StatusScheduleEnum;

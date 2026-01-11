@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\App;
 
+use App\Enums\Client\ContactTypeEnum;
 use App\Http\Requests\BaseRequest;
+use App\Models\Client\Contact;
 use App\Models\Pet\Pet;
 use App\Models\Pet\Specie;
 use Illuminate\Validation\Rule;
@@ -15,6 +17,7 @@ class RegisterRequest extends BaseRequest
     {
         return [
             'address' => ['required', 'array'],
+            'address.id' => ['nullable', 'string'],
             'address.street' => ['required', 'string'],
             'address.number' => ['nullable', 'string'],
             'address.complement' => ['nullable', 'string'],
@@ -23,6 +26,10 @@ class RegisterRequest extends BaseRequest
             'address.state' => ['required', 'string'],
             'address.country' => ['required', 'string'],
             'address.zip_code' => ['required', 'string'],
+            'contacts' => ['required', 'array'],
+            'contacts.*.id' => ['nullable', 'string', Rule::exists(Contact::class, 'id')],
+            'contacts.*.type' => ['required_with:contacts', Rule::in(ContactTypeEnum::values())],
+            'contacts.*.value' => ['required_with:contacts', 'string'],
             'pets' => ['required', 'array'],
             'pets.*.name' => ['required', 'string'],
             'pets.*.specie_id' => ['required', Rule::exists(Specie::class, 'id')],
@@ -46,6 +53,13 @@ class RegisterRequest extends BaseRequest
             'address.state' => 'estado',
             'address.country' => 'país',
             'address.zip_code' => 'cep',
+
+            //contacts
+            'contact' => 'contato',
+            'contact.*.name' => 'nome do contato',
+            'contact.*.type' => 'tipo do contato',
+            'contact.*.value' => 'valor do contato',
+
             // pets
             'pets' => 'pets',
             'pets.*.name' => 'nome do pet',

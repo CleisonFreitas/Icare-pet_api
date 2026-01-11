@@ -50,4 +50,9 @@ class Client extends Authenticatable
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
 }
