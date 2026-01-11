@@ -1,7 +1,6 @@
 <?php
 namespace App\Enums\Client;
 
-
 enum ContactTypeEnum: string
 {
     case EMAIL = 'EMAIL';
