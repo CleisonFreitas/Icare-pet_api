@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App;
 
+use App\Events\Client\ClientPetSaved;
 use App\Http\Requests\App\RegisterRequest;
 use App\Http\Resources\Pet\PetResource;
 use App\Models\Client\Client;
@@ -34,6 +35,7 @@ final class ClientPetController
         $client = Client::findByKey($clientId);
 
         $service->register($client, $request->validated());
+        event(new ClientPetSaved());
         return response()->json('Registro completo!', Response::HTTP_CREATED);
     }
 
