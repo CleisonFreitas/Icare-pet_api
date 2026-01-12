@@ -16,6 +16,7 @@ class ScheduleResource extends JsonResource
             'scheduled_date' => $this->scheduled_date,
             'service_type' => $this->service_type,
             'status' => $this->status,
+            'cancel_date' => $this->cancel_date
         ];
     }
 }
