@@ -4,7 +4,6 @@ namespace App\Models\Pet;
 
 use App\Enums\Pets\StatusScheduleEnum;
 use App\Models\Client\Client;
-use App\Models\Common\Note;
 use App\Traits\KeyEncrypter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,10 +22,12 @@ class Schedule extends Model
         'scheduled_date',
         'service_type',
         'status',
+        'cancel_date',
     ];
 
     protected $casts = [
         'scheduled_date' => 'datetime',
+        'cancel_date' => 'datetime',
         'status' => StatusScheduleEnum::class,
     ];
 
@@ -57,7 +58,8 @@ class Schedule extends Model
 
     public function isCanceled(): bool
     {
-        return $this->status === StatusScheduleEnum::CANCELLED;
+        return $this->status === StatusScheduleEnum::CANCELLED 
+            && $this->cancel_date != null;
     }
 
     public function isCompleted(): bool

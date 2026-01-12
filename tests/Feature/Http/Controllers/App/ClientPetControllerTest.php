@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\App;
 
+use App\Enums\Logs\User\UserActivityLogsEnum;
+use App\Events\Client\ClientPetSaved;
 use App\Models\Client\Address;
 use App\Models\Client\Contact;
 use App\Models\Pet\Pet;
@@ -28,8 +30,8 @@ final class ClientPetControllerTest extends TestCase
             ->toArray();
         $contact = [
             0 => Contact::factory()
-                    ->make(['client_id' => null])
-                    ->toArray()
+                ->make(['client_id' => null])
+                ->toArray()
         ];
         $specie = Specie::factory()->create();
         $pet = [
@@ -46,6 +48,17 @@ final class ClientPetControllerTest extends TestCase
 
         $response = $this->postJson($api, $data);
         $response->assertCreated();
-        Event::assertDispatched(ClientPetSave::class);
+        Event::assertDispatched(ClientPetSaved::class, function (ClientPetSaved $event) {
+            $info = $event->info;
+            $this->assertEquals(
+                UserActivityLogsEnum::USUARIO_REGISTROU_PETS_CLIENTE->value,
+                $info->getLogName()
+            );
+            $this->assertEquals(
+                UserActivityLogsEnum::USUARIO_REGISTROU_PETS_CLIENTE->description(),
+                $info->getDescription()
+            );
+            return true;
+        });
     }
 }

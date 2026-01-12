@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App;
 
+use App\Events\App\ClientScheduleCancelled;
 use App\Events\App\ClientScheduleUpdated;
 use App\Http\Requests\App\ScheduleManageRequest;
 use App\Http\Requests\App\ScheduleRequest;
@@ -11,6 +12,7 @@ use App\Http\Resources\Schedule\ScheduleResource;
 use App\Models\Client\Client;
 use App\Models\Pet\Pet;
 use App\Models\Pet\Schedule;
+use App\Services\Client\ClientScheduleCancelService;
 use App\Services\Client\ClientScheduleManagementService;
 use App\Services\Client\ClientScheduleCreateService;
 use App\Services\Client\ClientScheduleDetailsService;
@@ -76,7 +78,7 @@ final class ClientScheduleController
     }
 
     /**
-     * Responsible for cancelling/rescheduling the appointments.
+     * Responsible for rescheduling the appointments.
      *  
      * @param string $clientId
      * @param string $scheduleId
@@ -95,5 +97,27 @@ final class ClientScheduleController
 
         $newSchedule = $service->manage($client,$schedule, $request->validated());
         return response()->json(new ScheduleResource($newSchedule));
+    }
+
+    /**
+     * Cancelling schedules.
+     *
+     * @param string $clientId
+     * @param string $scheduleId
+     * @param ClientScheduleCancelService $service
+     * @return JsonResponse
+     */
+    public function cancel(
+        string $clientId,
+        string $scheduleId,
+        ClientScheduleCancelService $service
+    ): JsonResponse
+    {
+        /** @var Client */
+        $client = Client::findByKey($clientId);
+        $schedule = Schedule::findByKey($scheduleId);
+        $cancelledSchedule = $service->cancel($client, $schedule);
+        event(new ClientScheduleCancelled($cancelledSchedule));
+        return response()->json(new ScheduleResource($cancelledSchedule));
     }
 }

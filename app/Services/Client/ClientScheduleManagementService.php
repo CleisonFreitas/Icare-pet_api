@@ -15,17 +15,14 @@ class ClientScheduleManagementService
         Client $client,
         Schedule $schedule,
         array $data
-    ): Schedule
-    {
+    ): Schedule {
         $reschedule = (bool) data_get($data, 'reschedule', false);
         $motive = data_get($data, 'motive');
 
-        $this->makeValidations($client, $schedule, $motive, $reschedule);
+        $this->runValidations($client, $schedule, $motive, $reschedule);
 
         DB::beginTransaction();
-        $schedule->status = $reschedule
-            ? StatusScheduleEnum::RESCHEDULED
-            : StatusScheduleEnum::CANCELLED;
+        $schedule->status = StatusScheduleEnum::RESCHEDULED;
         $schedule->save();
         $schedule->fresh();
 
@@ -35,12 +32,12 @@ class ClientScheduleManagementService
         return $schedule;
     }
 
-    private function makeValidations(
+    private function runValidations(
         Client $client,
         Schedule $schedule,
         ?string $motive,
         bool $reschedule
-    ): void
+    ):void
     {
         $appointmentBelongsToClient = $schedule->client_id == $client->id;
 
@@ -55,14 +52,14 @@ class ClientScheduleManagementService
             StatusScheduleEnum::CONFIRMED,
         ])) {
             throw new \Exception(
-                'Esse serviço não está mais ápto para ser reagendado/cancelado! Por favor, entrar em contato com o nosso suporte'
+                'Esse serviço não está mais ápto para ser reagendado! Por favor, entrar em contato com o nosso suporte'
             );
         }
 
         if (!$motive) {
             $message = sprintf(
                 'É obrigatório informar o motivo do %s',
-                $reschedule ? 'cancelamento' : 'reagendamento'
+                'reagendamento'
             );
             throw new \Exception($message);
         }

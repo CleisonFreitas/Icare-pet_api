@@ -7,6 +7,7 @@ enum ClientActivityLogsEnum: string
     case APP_CLIENTE_LOGOU_NO_SISTEMA = 'APP_CLIENTE_LOGOU_NO_SISTEMA';
     case APP_CLIENTE_SAIU_DO_SISTEMA = 'APP_CLIENTE_SAIU_DO_SISTEMA';
     case APP_CLIENTE_AGENDOU_CONSULTA = 'APP_CLIENTE_AGENDOU_CONSULTA';
+    case APP_CLIENTE_CANCELOU_CONSULTA = 'APP_CLIENTE_CANCELOU_CONSULTA';
 
     public function description(): string
     {
@@ -15,6 +16,7 @@ enum ClientActivityLogsEnum: string
             self::APP_CLIENTE_SAIU_DO_SISTEMA => 'O cliente saiu do sistema',
 
             self::APP_CLIENTE_AGENDOU_CONSULTA => 'O cliente agendou uma consulta',
+            self::APP_CLIENTE_CANCELOU_CONSULTA => 'O cliente cancelou uma consulta',
         };
     }
 }
