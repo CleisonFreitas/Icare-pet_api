@@ -39,10 +39,13 @@ final class ClientScheduleControllerTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'id', 'client_id', 'pet_id', 'service_type'
+            'id',
+            'client_id',
+            'pet_id',
+            'service_type'
         ]);
 
-        Event::assertDispatched(ClientScheduleUpdated::class, function(ClientScheduleUpdated $event) {
+        Event::assertDispatched(ClientScheduleUpdated::class, function (ClientScheduleUpdated $event) {
             $info = $event->info;
             $this->assertEquals(
                 ClientActivityLogsEnum::APP_CLIENTE_AGENDOU_CONSULTA->value,
@@ -76,17 +79,20 @@ final class ClientScheduleControllerTest extends TestCase
         $response = $this->putJson($api);
         $response->assertOk();
 
-        Event::assertDispatched(ClientScheduleCancelled::class, function(ClientScheduleCancelled $event) {
-            $info = $event->info;
-            $this->assertEquals(
-                ClientActivityLogsEnum::APP_CLIENTE_CANCELOU_CONSULTA->value,
-                $info->getLogName()
-            );
-            $this->assertEquals(
-                ClientActivityLogsEnum::APP_CLIENTE_CANCELOU_CONSULTA->description(),
-                $info->getDescription()
-            );
-            return true;
-        });
+        Event::assertDispatched(
+            ClientScheduleCancelled::class,
+            function (ClientScheduleCancelled $event) {
+                $info = $event->info;
+                $this->assertEquals(
+                    ClientActivityLogsEnum::APP_CLIENTE_CANCELOU_CONSULTA->value,
+                    $info->getLogName()
+                );
+                $this->assertEquals(
+                    ClientActivityLogsEnum::APP_CLIENTE_CANCELOU_CONSULTA->description(),
+                    $info->getDescription()
+                );
+                return true;
+            }
+        );
     }
 }

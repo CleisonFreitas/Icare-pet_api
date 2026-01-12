@@ -8,7 +8,6 @@ use App\Models\Client\Address;
 use App\Models\Client\Contact;
 use App\Models\Pet\Pet;
 use App\Models\Pet\Specie;
-use App\Services\Client\ClientPetSave;
 use Illuminate\Support\Facades\Event;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
